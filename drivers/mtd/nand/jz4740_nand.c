@@ -62,25 +62,62 @@ int nr_partitions; /* Number of partitions */
  * Define partitions for flash devices
  */
 #ifdef CONFIG_JZ4740_PAVO
+/*
+ * Noah np1100 kernel dmesg
+<5>0x00000000-0x00200000 : "NOAH U-boot partition 0"
+<5>0x00200000-0x00400000 : "NOAH Serial partition 1"
+<5>0x00400000-0x00600000 : "NOAH Kernel partition 2"
+<5>0x00600000-0x01800000 : "NOAH ROOT FS partition 3"
+<5>0x01800000-0x02300000 : "NOAH  Settings partition 4"
+<5>0x02300000-0x0cd00000 : "NOAH Program FS partition 5"
+<5>0x0cd00000-0x15900000 : "NOAH Data FS partition 6 "
+<5>0x15900000-0x16500000 : "NOAH User FS partition 7 "
+<5>0x16500000-0x40000000 : "NOAH User Disk  partition 8  vfat, do not mount "
+ */
 struct mtd_partition partition_info[] = {
-	{name:"NAND BOOT partition",
-	 offset:0 * 0x100000,
-	 size:4 * 0x100000,
+	{name:"NOAH U-boot partition 0",
+	 offset:	0x00000000,
+	 size:		0x00200000,
 	 use_planes: 0,
 	 mtdblock_jz_invalid: 1},
-	{name:"NAND KERNEL partition",
-	 offset:4 * 0x100000,
-	 size:4 * 0x100000,
+	{name:"NOAH Serial partition 1",
+	 offset:	0x00200000,
+	 size:		0x00400000-0x00200000,
 	 use_planes: 0,
 	 mtdblock_jz_invalid: 1},
-	{name:"NAND ROOTFS partition",
-	 offset:8 * 0x100000,
-	 size:504 * 0x100000,
+	{name:"NOAH Kernel partition 2",
+	 offset:	0x00400000,
+	 size:		0x00600000-0x00400000,
 	 use_planes: 0,
 	 mtdblock_jz_invalid: 1},
-	{name:"NAND VFAT partition",
-	 offset:512 * 0x100000,
-	 size:512 * 0x100000,
+	{name:"NOAH ROOT FS partition 3",
+	 offset:	0x00600000,
+	 size:		0x01800000-0x00600000,
+	 use_planes: 0,
+	 mtdblock_jz_invalid: 1},
+	{name:"NOAH  Settings partition 4",
+	 offset:	0x01800000,
+	 size:		0x02300000-0x01800000,
+	 use_planes: 0,
+	 mtdblock_jz_invalid: 1},
+	{name:"NOAH Program FS partition 5",
+	 offset:	0x02300000,
+	 size:		0x0cd00000-0x02300000,
+	 use_planes: 0,
+	 mtdblock_jz_invalid: 1},
+	{name:"NOAH Data FS partition 6 ",
+	 offset:	0x0cd00000,
+	 size:		0x15900000-0x0cd00000,
+	 use_planes: 0,
+	 mtdblock_jz_invalid: 1},
+	{name:"NOAH User FS partition 7 ",
+	 offset:	0x15900000,
+	 size:		0x16500000-0x15900000,
+	 use_planes: 0,
+	 mtdblock_jz_invalid: 1},
+	{name:"NOAH User Disk  partition 8  vfat, do not mount ",
+	 offset:	0x16500000,
+	 size:		0x40000000-0x16500000,
 	 use_planes: 1,
 	 mtdblock_jz_invalid: 0},
 };
